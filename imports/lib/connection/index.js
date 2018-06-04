@@ -12,7 +12,7 @@ if (Meteor.isCordova) {
     Tracker.autorun(() => {
         Meteor.disconnect(); // Don't use default connection.
 
-        let url = Session.get('cedarserver-url');
+        let url = Session.get('server-url');
         if (url) {
             Trivial = DDP.connect(url);
             MongoConn = {connection: Trivial};

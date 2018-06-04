@@ -41,3 +41,4 @@ msgfmt:extract
 msgfmt:ui-dev-only
 ostrio:files
 reywood:publish-composite
+accounts-base

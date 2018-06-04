@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { Media, MediaFiles } from '../collections.js';
 
-import './media_header.html';
+import './media_item.html';
 
-Template.media_header.helpers({
+Template.media_item.helpers({
     thumbURL() {
         if (this.thumb) {
             let file = MediaFiles.findOne({_id: this.thumb});

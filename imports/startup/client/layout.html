@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-12">
                 <nav class="navbar justify-content-between">
-                    <h1>{{mf 'media_title' 'Media'}}</h1>
+                    <h3>{{mf 'trivial_title' 'Trivial'}}</h3>
 
                     {{#if isInRole 'editor'}}
                         <button id="add-playlist" class="btn btn-outline-success">
@@ -26,34 +26,8 @@
             </div>
             
             <div class="col-lg-9 col-md-12">
-                <nav class="navbar justify-content-between">
-                    <h1>All</h1>
-
-                    {{#if isInRole 'editor'}}
-                        <button id="upload" class="btn btn-outline-success" data-toggle="modal" data-target="#media-upload-modal">
-                            <i class="fa fa-upload"></i>
-                            {{mf 'upload' 'Upload'}}
-                        </button>
-                    {{/if}}
-                </nav>
-
-                <div class="list-group">
-                    {{#each media}}
-                        <div class="list-group-item">
-                            <div class="media">
-                                {{> media_header}}
-                            </div>
-                        </div>
-                    {{/each}}
-                </div>
+                {{> yield}}
             </div>
         </div>
-            
-            <ul class="navbar-nav">
-
-            </ul>
-        </div>
-    </nav>
-    
-    {{> yield}}
+    </div>
 </template>

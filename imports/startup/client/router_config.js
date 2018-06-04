@@ -1,8 +1,9 @@
+import { Router } from 'meteor/iron:router';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
+
 Router.configure({
     layoutTemplate: 'layout'
 });
-
-Router.plugin('ensureSignedIn');
 
 AccountsTemplates.configure({
     defaultLayout: 'layout',

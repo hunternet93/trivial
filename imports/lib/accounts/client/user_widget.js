@@ -1,29 +1,30 @@
-import { Meteor } from 'meteor/meteor';
+import { Trivial } from '/imports/lib/connection';
+import { Accounts } from '/imports/lib/accounts';
 import { Template } from 'meteor/templating';
 
-import './layout.html';
+import './user_widget.html';
 
 Template.user_widget.helpers({
     userPrimaryEmail() {
-        return Meteor.user().emails[0].address;
+        return Accounts.user().emails[0].address;
     },
     
     themeIs(theme) {
-        return Meteor.user().theme == theme;
+        return Accounts.user().theme == theme;
     }
 });
 
 Template.user_widget.events({
     'click #logout-user'(event, template) {
-        Meteor.logout();
+        Accounts.logout();
     },
     
     'click #switch-theme'(event, template) {
-        let user = Meteor.user();
+        let user = Accounts.user();
         let theme = 'dark';
         if (user.theme == 'dark') theme = 'light';
         
-        Meteor.call('user.theme', user._id, theme);
+        Trivial.call('user.theme', user._id, theme);
         window.location.reload();
     }
 });

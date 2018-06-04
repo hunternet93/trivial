@@ -4,7 +4,7 @@ import { Template } from 'meteor/templating';
 import { Media, Playlists, MediaFiles } from '../collections.js';
 import './media_browser.html';
 
-Router.route('/media', function () {
+Router.route('/', function () {
     this.wait(Trivial.subscribe('playlists.list'));
     
     if (this.ready()) {
@@ -25,17 +25,7 @@ Template.media_browser.onCreated(function () {
     Trivial.subscribe('media.view', '', [], 0, 100);
 });
 
-Template.media_browser.helpers({
-    samplePlaylists() {
-        let sample = [];
-        
-        for (let i = 1; i < 25; i++) {
-            sample.push({title: `Test Playlist ${i}`});
-        }
-        
-        return sample;
-    },
-    
+Template.media_browser.helpers({    
     media() {
         return Media.find({}, {sort: [['title'], ['asc']]});
     },
