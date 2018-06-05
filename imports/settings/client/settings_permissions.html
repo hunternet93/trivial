@@ -1,0 +1,21 @@
+<template name="settings_permissions">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="require-signed-in" {{isChecked 'require_signed_in'}}>
+                <label class="form-check-label" for="require-signed-in">
+                    Require users to be signed in to view media
+                </label>
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="require-approval" {{isChecked 'require_approval'}}>
+                <label class="form-check-label" for="require-approval">
+                    Require new users to be approved
+                </label>
+            </div>
+        </li>
+    </ul>
+</template>

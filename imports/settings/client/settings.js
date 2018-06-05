@@ -2,6 +2,7 @@ import { Trivial } from '/imports/lib/connection';
 import { Template } from 'meteor/templating';
 
 import './settings_users.js';
+import './settings_permissions.js';
 import './settings.html';
 
 Router.route('/settings', function () {

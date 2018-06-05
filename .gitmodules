@@ -1,0 +1,3 @@
+[submodule "private/mediatool"]
+	path = private/mediatool
+	url = https://github.com/cedarproject/mediatool

@@ -3,11 +3,19 @@
         <h1>{{mf 'settings_title' 'Settings'}}</h1>
     </nav>
 
-    <div id="users" class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <h4 class="card-title">Users</h4>
         </div>
 
         {{> settings_users}}
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Default Permissions</h4>
+        </div>
+
+        {{> settings_permissions}}
     </div>
 </template>
