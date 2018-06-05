@@ -1,1 +1,1 @@
-import './user.js';
+import './user_widget.js';

@@ -1,18 +1,18 @@
 import { Settings } from '../collections.js';
 
-// Field `pub` determines if document is sent to clients, can be 'all', a user role, or `server` for server-only
-// Field `edit` sets which user role can edit the document, or `server` for server-only
-
 let fixtures = [
-// Core settings
 {
-    _id: 'settings_fixtures_inserted',
-    value: true,
-    pub: 'server',
-    change: 'server'
+    _id: 'require_signed_in',
+    value: false
+},
+{
+    _id: 'require_approval',
+    value: false
 }
 ];
 
 Meteor.startup(function () {
-    Settings.insert(fixtures, () => {});
+    fixtures.forEach((fixture) => {
+        Settings.insert(fixture, () => {}); // Empty callback to ignore errors if fixture already in DB
+    });
 });

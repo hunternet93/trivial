@@ -17,7 +17,7 @@ Router.route('/', function () {
         this.render('loading');
     }
 }, {
-    name: 'media.browser'
+    name: 'media_browser'
 });
 
 Template.media_browser.onCreated(function () {

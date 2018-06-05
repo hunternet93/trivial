@@ -1,23 +1,52 @@
 <template name="settings_users">
     <ul class="list-group list-group-flush">
         {{#each users}}
-            <li class="list-group-item">
-                <a href="{{pathFor 'user' _id}}">{{getPrimaryEmail}}</a>
-                <p>
-                    {{#if userInRole 'viewer'}}
-                        <span class="badge badge-secondary">{{mf 'role_viewer' 'Viewer'}}</span>
-                    {{/if}}
-                    {{#if userInRole 'controller'}}
-                        <span class="badge badge-info">{{mf 'role_controller' 'Controller'}}</span>
-                    {{/if}}
-                    {{#if userInRole 'editor'}}
-                        <span class="badge badge-info">{{mf 'role_editor' 'Editor'}}</span>
-                    {{/if}}
-                    {{#if userInRole 'admin'}}
-                        <span class="badge badge-success">{{mf 'role_admin' 'Admin'}}</span>
-                    {{/if}}
-                </p>
+            <li class="list-group-item d-flex">
+                <p class="mr-auto">{{getPrimaryEmail}}</p>
+                
+                <div class="btn-group mr-1">
+                    <button type="button" data-role="" class="set-role btn btn-secondary {{isActive ''}}" {{isDisabled}}>
+                        {{mf 'role_none' 'None'}}
+                    </button>
+                    <button type="button" data-role="viewer" class="set-role btn btn-secondary {{isActive 'viewer'}}" {{isDisabled}}>
+                        {{mf 'role_viewer' 'Viewer'}}
+                    </button>
+                    <button type="button" data-role="editor" class="set-role btn btn-secondary {{isActive 'editor'}}" {{isDisabled}}>
+                        {{mf 'role_editor' 'Editor'}}
+                    </button>
+                    <button type="button" data-role="admin" class="set-role btn btn-secondary {{isActive 'admin'}}" {{isDisabled}}>
+                        {{mf 'role_admin' 'Admin'}}
+                    </button>
+                </div>
+                
+                <button type="button" class="delete-user btn btn-danger" {{isDisabled}}>
+                    <i class="fa fa-trash"></i>
+                </button>
             </li>
         {{/each}}
     </ul>
+
+    <div class="modal fade" id="del-user-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{mf 'delete_user_title' 'Delete User?'}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{mf 'delete_user_body' 'Are you sure you want to delete the user "{user}"?' user=deleteTargetEmail}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-delete-user" type="button" class="btn btn-danger" data-dismiss="modal">
+                        {{mf 'delete_user_button' 'Delete User'}}
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        {{mf 'cancel' 'Cancel'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

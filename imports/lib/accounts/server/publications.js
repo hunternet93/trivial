@@ -10,6 +10,7 @@ Meteor.publish('users.all', function () {
 });
 
 Meteor.publish('users.one', function (userId) {
-    if (userId == this.userId || is_admin(this))
+    if (userId == this.userId || is_admin(this)) {
         return Meteor.users.find({}, {fields: {services: 0}});
+    }
 });

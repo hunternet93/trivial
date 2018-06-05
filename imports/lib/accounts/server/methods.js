@@ -17,34 +17,25 @@ Meteor.methods({
     },
     
     'user.delete'(user_id) {
-        if (user_id != this.userId) is_admin(this);
+        is_admin(this);
+        if (user_id == this.userId)
+            throw new Meteor.Error('cannot-delete-self', 'Users cannot delete themselves');
         
         Meteor.users.remove({_id: user_id});
     },
     
-    'user.add_role'(user_id, role) {
+    'user.set_role'(user_id, role) {
         is_admin(this);
+        
+        Roles.removeUsersFromRoles(user_id, ['viewer', 'editor', 'admin']);
         
         let roles = [role];
 
-        if (role == 'editor' || role == 'controller')
-            roles.push('viewer');
+        if (role == 'editor')
+            roles = ['viewer', role];
         else if (role == 'admin')
-            roles = ['viewer', 'editor', 'controller', role];
+            roles = ['viewer', 'editor', role];
         
         Roles.addUsersToRoles(user_id, roles);
-    },
-    
-    'user.remove_role'(user_id, role) {
-        is_admin(this);
-        
-        let roles = [role];
-        
-        if (role == 'editor' || role == 'controller')
-            roles.push('admin');
-        else if (role == 'viewer')
-            roles = [role, 'controller', 'editor', 'admin'];
-            
-        Roles.removeUsersFromRoles(user_id, roles);
-    }        
+    }       
 });

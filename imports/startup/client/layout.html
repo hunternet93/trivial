@@ -5,20 +5,36 @@
         <div class="row">
             <div class="col-lg-3 col-md-12">
                 <nav class="navbar justify-content-between">
-                    <h3>{{mf 'trivial_title' 'Trivial'}}</h3>
+                    <h1>{{mf 'trivial_title' 'Trivial'}}</h1>
 
-                    {{#if isInRole 'editor'}}
+                    {{> user_widget}}
+                </nav>
+                
+                <div class="list-group list-group-flush mb-4">
+                    <a class="list-group-item list-group-item-action" href="{{pathFor 'media_browser'}}">
+                        <i class="fa fa-play"></i>
+                        {{mf 'media' 'Media'}}
+                    </a>
+
+                    {{#if isInRole 'admin'}}
+                        <a class="list-group-item list-group-item-action" href="{{pathFor 'settings'}}">
+                            <i class="fa fa-cog"></i>
+                            {{mf 'settings' 'Settings'}}
+                        </a>
+                    {{/if}}
+                </div>
+                
+                <nav class="navbar justify-content-between">
+                    <h3>Playlists</h3>
+
+                    {{#if isInRole 'admin'}}
                         <button id="add-playlist" class="btn btn-outline-success">
                             <i class="fa fa-plus"></i>
-                            {{mf 'add_playlist' 'Add Playlist'}}
                         </button>
                     {{/if}}
                 </nav>
-                <div class="list-group">
-                    <button class="list-group-item list-group-item-action active">{{mf 'all' 'All'}}</button>
-                    
-                    <hr>
-                    
+
+                <div class="list-group list-group-flush">                    
                     {{#each samplePlaylists}}
                         <button class="list-group-item list-group-item-action">{{title}}</button>
                     {{/each}}

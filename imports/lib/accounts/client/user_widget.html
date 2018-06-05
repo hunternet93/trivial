@@ -1,12 +1,12 @@
 <template name="user_widget">
     {{#if currentUser}}
         {{#with currentUser}}
-            <li class="nav-item dropdown">
+            <div class="dropdown">
                 <a class="btn btn-outline-primary dropdown-toggle" href="#" data-toggle="dropdown">
                     {{userPrimaryEmail}}
                 </a>
+                
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href={{pathFor 'user' _id}}>{{mf 'profile' 'Profile'}}</a>
                     <a id="switch-theme" class="dropdown-item" href="#">
                         {{#if themeIs 'light'}}
                             {{mf 'use_dark_theme' 'Use Dark Theme'}}
@@ -16,11 +16,9 @@
                     </a>
                     <a id="logout-user" class="dropdown-item" href="#">{{mf 'logout' 'Log Out'}}</a>
                 </div>
-            </li>
+            </div>
         {{/with}}
     {{else}}
-        <li class="nav-item">
-            <a id="sign-in" class="btn btn-primary-outline" href="#">{{mf 'sign-in' 'Sign In'}}</a>
-        </li>
+        <a class="btn btn-outline-primary" href="/sign-in">{{mf 'sign-in' 'Sign In'}}</a>
     {{/if}}
 </template>

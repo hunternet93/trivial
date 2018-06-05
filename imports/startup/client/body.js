@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 
 import '/imports/lib/bootstrap/js/bootstrap.bundle.min.js';
 
-Meteor.autorun(function () {
+Meteor.startup(function () {
     let theme = 'light';
 
     let user = Meteor.user();

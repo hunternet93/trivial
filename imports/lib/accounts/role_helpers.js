@@ -16,15 +16,6 @@ function is_editor (context) {
     else return true;
 }
 
-function is_controller (context) {
-    if (context.connection === null) return true; // Caller is server
-    if (!Roles.userIsInRole(context.userId, ['controller'])) {
-        if ('ready' in context) context.ready();
-        else throw new Meteor.Error('not-authorized', 'User must have the Controller role to perform this action');
-    }
-    else return true;
-}
-
 function is_admin (context) {
     if (context.connection === null) return true; // Caller is server
     if (!Roles.userIsInRole(context.userId, ['admin'])) {
@@ -34,4 +25,4 @@ function is_admin (context) {
     else return true;
 }
 
-export { is_viewer, is_editor, is_controller, is_admin };
+export { is_viewer, is_editor, is_admin };
