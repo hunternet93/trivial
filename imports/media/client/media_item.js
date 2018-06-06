@@ -12,5 +12,9 @@ Template.media_item.helpers({
 
         // TODO make a default thumb for each media type
         return '';
+    },
+    
+    linkData() {
+        return {_id: this._id}
     }
 });

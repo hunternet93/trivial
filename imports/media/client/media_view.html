@@ -1,0 +1,14 @@
+<template name="media_view">
+    <nav class="navbar justify-content-between">
+        {{#if isInRole 'editor'}}
+            <div id="media-title" class="h1">{{> editable_text text=title}}</div>
+
+            <button id="upload" class="btn btn-outline-success" data-toggle="modal" data-target="#media-upload-modal">
+                <i class="fa fa-upload"></i>
+                {{mf 'upload' 'Upload'}}
+            </button>
+        {{else}}
+            <h1>{{title}}</h1>
+        {{/if}}
+    </nav>
+</template>

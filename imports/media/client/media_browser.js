@@ -1,18 +1,14 @@
 import { Trivial } from '/imports/lib/connection';
 import { Template } from 'meteor/templating';
+import { Router } from 'meteor/iron:router';
 
 import { Media, Playlists, MediaFiles } from '../collections.js';
+
 import './media_browser.html';
 
-Router.route('/', function () {
-    this.wait(Trivial.subscribe('playlists.list'));
-    
+Router.route('/', function () {    
     if (this.ready()) {
-        this.render('media_browser', {
-            data: function () {
-                return Playlists.find({}, {sort: [['title', 'asc']]});
-            }
-        });
+        this.render('media_browser')
     } else {
         this.render('loading');
     }
