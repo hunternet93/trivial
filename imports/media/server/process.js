@@ -90,7 +90,7 @@ MediaFiles.addListener('afterUpload', function (file) {
         percentage: 0,
         tracks: [],
         metadata: {},
-        file: file._id,
+        source: file._id,
         poster: null,
         thumbnail: null,
         added: new Date(),

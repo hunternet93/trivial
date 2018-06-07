@@ -3,12 +3,55 @@
         {{#if isInRole 'editor'}}
             <div id="media-title" class="h1">{{> editable_text text=title}}</div>
 
-            <button id="upload" class="btn btn-outline-success" data-toggle="modal" data-target="#media-upload-modal">
-                <i class="fa fa-upload"></i>
-                {{mf 'upload' 'Upload'}}
+            <button id="upload" class="btn btn-outline-danger" data-toggle="modal" data-target="#del-media-modal">
+                <i class="fa fa-trash"></i>
+                {{mf 'delete' 'Delete'}}
             </button>
         {{else}}
             <h1>{{title}}</h1>
         {{/if}}
     </nav>
+    
+    <div class="media-view-container">
+        {{#if typeIs 'video'}}
+            <video class="media-view-content" src="{{sourceFile.link}}?play=true" poster="{{posterImage.link}}" type="{{sourceFile.type}}" controls></video>
+        {{/if}}
+        
+        {{#if typeIs 'audio'}}
+            <img class="media-view-content" src="{{posterImage.link}}">
+            <audio class="media-view-audio" src="{{sourceFile.link}}?play=true" type="{{sourceFile.type}}" controls></audio>
+        {{/if}}
+        
+        {{#if typeIs 'image'}}
+            <img class="media-view-content" src="{{posterImage.link}}">
+        {{/if}}
+        
+        {{#if typeIs 'invalid'}}
+            <h1 class="text-danger">{{mf 'media_file_invalid' 'This file could not be imported.'}}</h1>
+        {{/if}}
+    </div>
+
+    <div class="modal fade" id="del-media-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{mf 'delete_media_title' 'Delete Media?'}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{mf 'delete_media_body' 'Are you sure you want to delete the media item "{media}"?' media=title}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-delete-media" type="button" class="btn btn-danger" data-dismiss="modal">
+                        {{mf 'delete_media_button' 'Delete Media'}}
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        {{mf 'cancel' 'Cancel'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

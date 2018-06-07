@@ -59,8 +59,18 @@ publishComposite('media.upload', function (upload_id) {
     }
 });
 
-Meteor.publish('media.one', function (media_id) {
-    if (is_viewer(this)) return Media.find({_id: media_id});
+publishComposite('media.one', function (media_id) {
+    return {
+        find() {
+            if (is_viewer(this)) return Media.find(media_id);
+        },
+        
+        children: [{
+            find(media) {
+                return MediaFiles.find({_id: {$in: [media.source, media.poster, media.thumb]}}).cursor;
+            }
+        }]
+    }
 });
 
 

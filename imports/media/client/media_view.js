@@ -27,9 +27,30 @@ Router.route('/media/:_id', {
     name: 'media_view'
 });
 
+Template.media_view.helpers({
+    typeIs(type) {
+        return this.type == type;
+    },
+    
+    sourceFile() {
+        return MediaFiles.findOne(this.source);
+    },
+    
+    posterImage() {
+        return MediaFiles.findOne(this.poster);
+    }
+});
+
 Template.media_view.events({
     'edited #media-title'(event, template) {
         let title = event.detail;
         if (title.length > 0) Trivial.call('media.title', this._id, title);
+    },
+    
+    'click #confirm-delete-media'(event, template) {
+        template.$('#del-media-modal').modal('hide').on('hidden.bs.modal', () => {
+            Meteor.call('media.delete', this._id);
+            Router.go('media_browser');
+        });
     }
 });

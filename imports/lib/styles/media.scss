@@ -3,3 +3,19 @@
     height: 4em;
     object-fit: contain;
 }
+
+.media-view-container {
+    width: 100%;
+    height: 30em;
+    background-color: black;
+}
+
+.media-view-content {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.media-view-audio {
+    width: 100%;
+}
